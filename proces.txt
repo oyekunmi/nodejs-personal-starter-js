@@ -1,0 +1,5 @@
+//create a git repository
+//install framework of choice
+//create hello world app
+//setup project structure with empty files
+//setup logging

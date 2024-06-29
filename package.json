@@ -1,0 +1,19 @@
+{
+  "name": "treasure-hunt-node",
+  "version": "1.0.0",
+  "description": "Collection of treasures into a db",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "npm test"
+  },
+  "author": "Oyesola Ogundele",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
