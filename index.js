@@ -1,16 +1,14 @@
-const express = require('express');
-const logger = require('./src/configurations/logger');
+require('dotenv').config();
+const app = require('express')();
 
-const app = express();
+//setup framework
+const configurations = require('./src/configurations/config');
+const logger = require('./src/configurations/logger')(configurations);
+const router = require('./src/routes')(logger);
 
-app.get('/', (req, res) => {
-    logger.info('Hello World');
-    res.send('Hello World');
+//start server
+app.use(router);
+
+app.listen(configurations.port, () => {
+    logger.info('Server is running on port ' + configurations.port);
 });
-
-app.listen(3000, () => {
-    logger.info('Server is running on port 3000');
-});
-
-
-
