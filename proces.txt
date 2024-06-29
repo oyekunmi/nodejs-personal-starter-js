@@ -6,4 +6,7 @@
 //setup configuration files
     //handle mutiple environments
 //refractor to taste
-//setup database
+//setup dependencies
+    // setup docker compose
+    // db
+    // cache
