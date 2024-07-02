@@ -1,12 +1,8 @@
-
-
-function usecases(logger, db, cache) {
-
+function usecases(logger, repositories, cache) {
 
     return {
-        registerUser: require('./register-user')(logger, db, cache),
+        registerUser: require('./register-user')(logger, repositories, cache),
     };
 }
-
 
 module.exports = usecases;

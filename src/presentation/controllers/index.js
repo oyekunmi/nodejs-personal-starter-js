@@ -5,6 +5,4 @@ function controllers(logger, usecases) {
     };
 }
 
-
-
 module.exports = controllers;

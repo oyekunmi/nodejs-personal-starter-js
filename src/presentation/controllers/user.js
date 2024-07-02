@@ -1,6 +1,3 @@
-
-
-
 function controller(logger, usecases) {
 
     async function registerUser(req, res, next) {

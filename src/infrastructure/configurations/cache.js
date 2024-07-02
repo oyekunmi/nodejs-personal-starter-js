@@ -1,5 +1,5 @@
 const Redis = require('ioredis');
-async function setup(configurations, logger) {
+function setup(configurations, logger) {
     const redis = new Redis(configurations.cache);
     redis.on('connect', () => {
         logger.info('Connected to Redis');
