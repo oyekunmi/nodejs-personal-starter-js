@@ -10,7 +10,7 @@
     // setup docker compose
     // db
     // cache
-
+//create register endpoint
 
 //@TODO
 //setup monitoring
