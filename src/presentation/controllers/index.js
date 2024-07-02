@@ -1,5 +1,5 @@
-function controllers(logger) {
-    const userController = require('./user')(logger);
+function controllers(logger, usecases) {
+    const userController = require('./user')(logger, usecases);
     return {
         ...userController,
     };

@@ -12,8 +12,8 @@ async function bootstrap() {
     const logger = require('./src/infrastructure/configurations/logger')(configurations);
     const db = await require('./src/infrastructure/configurations/database')(configurations, logger);
     const cache = await require('./src/infrastructure/configurations/cache')(configurations, logger);
-    const controllers = require('./src/presentation/controllers')(logger);
-    // const useCases = require('./src/domain/use-cases')(logger, db, cache);
+    const usecases = require('./src/application/usecases')(logger, db, cache);
+    const controllers = require('./src/presentation/controllers')(logger, usecases);
 
     const router = require('./src/presentation/routes')(logger, controllers);
 

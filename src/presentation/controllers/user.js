@@ -1,19 +1,12 @@
-const bcrypt = require('bcrypt');
-const User = require('../../domain/entities/user');
 
 
-function controllers(logger) {
+
+function controller(logger, usecases) {
 
     async function registerUser(req, res, next) {
-        try {
-            const { name, email, password } = req.body;
-            const hashedPassword = bcrypt.hashSync(password, 10);
-            const user = new User({ name, email, password: hashedPassword });
-            logger.info('User registered');
-            res.send('User registered');
-        } catch (error) {
-            next(error);
-        }
+        const { name, email, password } = req.body;
+        const result = await usecases.registerUser({ name, email, password });
+        res.status(201).json(result);
     }
 
     return {
@@ -21,4 +14,4 @@ function controllers(logger) {
     };
 }
 
-module.exports = controllers;
+module.exports = controller;
