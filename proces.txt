@@ -10,3 +10,12 @@
     // setup docker compose
     // db
     // cache
+
+
+//@TODO
+//setup monitoring
+    //prometheus
+    //grafana
+    //https://github.com/coder-society/nodejs-application-monitoring-with-prometheus-and-grafana/tree/master
+    //https://signoz.io/blog/nodejs-performance-monitoring/#opentelemetry-and-signoz
+    //https://dev.to/signoz/setting-up-application-monitoring-for-your-nodejs-app-in-20-mins-with-open-source-solution-134i?comments_sort=oldest

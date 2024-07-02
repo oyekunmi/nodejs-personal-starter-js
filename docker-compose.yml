@@ -1,4 +1,6 @@
-
+networks:
+  monitoring:
+    driver: bridge
 services:
   db:
     image: mongo:latest
@@ -8,6 +10,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Guardian365
+    networks:
+      - monitoring
   mongo-express:
     image: mongo-express
     restart: always
@@ -17,6 +21,13 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: Guardian365
       ME_CONFIG_MONGODB_SERVER: db
-      basicAuth : false
-  redis:
+      ME_CONFIG_BASICAUTH: false
+    networks:
+      - monitoring
+  cache:
     image: "redis:alpine"
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - monitoring

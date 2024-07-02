@@ -1,6 +1,5 @@
 const winston = require('winston');
 
-
 function logger(configuration) {
 
     return winston.createLogger({

@@ -11,6 +11,7 @@ async function bootstrap() {
     const logger = require('./src/configurations/logger')(configurations);
     const router = require('./src/routes')(logger);
     const db = await require('./src/configurations/database')(configurations, logger);
+    const cache = await require('./src/configurations/cache')(configurations, logger);
 
     app.use(router); 
 
@@ -19,7 +20,6 @@ async function bootstrap() {
         logger
     }
 }
-
 
 function startServer(configurations, logger) {
     app.listen(configurations.port, () => {
