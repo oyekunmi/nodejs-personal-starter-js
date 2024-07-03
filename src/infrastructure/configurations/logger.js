@@ -1,14 +1,15 @@
 const winston = require('winston');
+const { combine, timestamp, json, colorize, simple } = winston.format;
 
 function logger(configuration) {
 
     return winston.createLogger({
         level: configuration.logger.level,
-        format: winston.format.timestamp(),
+        format: combine(timestamp(), colorize(), json()),
         defaultMeta: { service: 'treasure-hunt' },
         transports: [
             //console
-            new winston.transports.Console({ format: winston.format.simple() }),
+            new winston.transports.Console({ format: simple() }),
         //     //
         //     // - Write all logs with importance level of `error` or less to `error.log`
         //     // - Write all logs with importance level of `info` or less to `combined.log`
