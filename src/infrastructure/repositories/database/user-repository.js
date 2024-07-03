@@ -1,12 +1,18 @@
 function repository(logger, db) {
+    const collection = 'users';
     async function createUser({ name, email, password }) {
-        // const user = await db.User.create({ name, email, password });
-        logger.info('User created in database');
-        return { name, email };
+
+        //@TODO: Should we introduce a data model for user?
+        const user = { name, email, password };
+        const userDocument = await db.collection(collection).insertOne(user);
+
+        logger.info(`User created in database ${userDocument && userDocument.insertedId}`);
+        return { id: userDocument.insertedId, name, email };
     }
 
     async function getUserByEmail(email) {
-        const user = await db.User.findOne({ where: { email } });
+        const user = await db.collection(collection).findOne({ email });
+        //@TODO: Should we introduce a data model for user?
         return user;
     }
 

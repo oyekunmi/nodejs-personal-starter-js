@@ -1,6 +1,4 @@
-//generate a connection to the database
 const { MongoClient } = require('mongodb');
-
 
 async function setup(configurations, logger) {
     const url = configurations.db.url;
@@ -8,9 +6,9 @@ async function setup(configurations, logger) {
 
     try {
         const db = await MongoClient.connect(url);
-        dbo = db.db(dbName);
+        const dbo = db.db(dbName);
         logger.info('Connected to MongoDB');
-        return db;
+        return dbo;
     } catch (err) {
         logger.error('Error occurred while connecting to MongoDB Atlas...\n', err);
     }

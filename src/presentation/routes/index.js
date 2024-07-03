@@ -8,6 +8,7 @@ function setup(logger, controllers) {
     });
 
     router.post('/user/register', controllers.registerUser);
+    router.post('/user/login', controllers.loginUser);
 
     return router;
 }

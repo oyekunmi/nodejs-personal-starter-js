@@ -11,6 +11,12 @@
     // db
     // cache
 //create register endpoint
+    //implement repository
+    //implement usecases
+    //implement controller
+    //implement routes
+    //implement global exception handler
+
 
 //@TODO
 //setup monitoring

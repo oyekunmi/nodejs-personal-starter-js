@@ -3,17 +3,11 @@ const UserEntity = require('../../domain/entities/user-entity');
 
 function usecase(logger, repositories) {
 
-    async function registerUser({ name, email, password }) {
-        const existing = await repositories.user.getUserByEmail(email);
-        if (existing) {
-            logger.info('user already exists');
-            return new Error('User already exists');
-        }
-
+    async function registerUser({ email, password }) {
         const hashedPassword = bcrypt.hashSync(password, 10);
         const user = new UserEntity({ name, email, password: hashedPassword });
         const insertedUser = await repositories.user.createUser(user);
-        logger.info('User registered');
+        logger.info('user authenticated');
         return insertedUser;
     }
 
