@@ -4,11 +4,12 @@ const UserEntity = require('../../domain/entities/user-entity');
 function usecase(logger, repositories) {
 
     async function registerUser({ email, password }) {
-        const hashedPassword = bcrypt.hashSync(password, 10);
-        const user = new UserEntity({ name, email, password: hashedPassword });
-        const insertedUser = await repositories.user.createUser(user);
+        const existing = await repositories.user.getUserByEmail(email);
+        if (!existing || !bcrypt.compareSync(password, existing.password)) {
+            return new Error('Invalid username or password');
+        }
         logger.info('user authenticated');
-        return insertedUser;
+        return new UserEntity({ email: existing.email, name: existing.name, id: existing._id });
     }
 
     return registerUser;

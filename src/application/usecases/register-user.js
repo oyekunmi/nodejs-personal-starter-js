@@ -6,7 +6,6 @@ function usecase(logger, repositories) {
     async function registerUser({ name, email, password }) {
         const existing = await repositories.user.getUserByEmail(email);
         if (existing) {
-            logger.info('user already exists');
             return new Error('User already exists');
         }
 
