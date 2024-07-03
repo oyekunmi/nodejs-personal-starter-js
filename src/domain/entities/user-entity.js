@@ -3,7 +3,7 @@ class UserEntity {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = password; //encrypted password
     }
 }
 

@@ -16,6 +16,10 @@
     //implement controller
     //implement routes
     //implement global exception handler
+//create login endpoint
+//setup unit tests
+//setup integration tests
+
 
 
 //@TODO
