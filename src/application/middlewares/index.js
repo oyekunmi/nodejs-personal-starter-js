@@ -1,3 +1,7 @@
-module.exports = {
-    errorHandler: require('./exception-handler')
-};
+function middlewares(logger) {
+    return {
+        errorHandler: require('./exception-handler')(logger)
+    };
+}
+
+module.exports = middlewares;
