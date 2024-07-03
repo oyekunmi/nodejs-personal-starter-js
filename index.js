@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+
 const app = express();
 
 bootstrap().then(({ configurations, logger }) => {
@@ -12,7 +13,7 @@ async function bootstrap() {
     const logger = require('./src/infrastructure/configurations/logger')(configurations);
     const db = await require('./src/infrastructure/configurations/database')(configurations, logger);
     const cache = require('./src/infrastructure/configurations/cache')(configurations, logger);
-
+    const middlewares = require('./src/application/middlewares');
     const repositories = require('./src/infrastructure/repositories/database')(logger, db);
     const usecases = require('./src/application/usecases')(logger, repositories, cache);
     const controllers = require('./src/presentation/controllers')(logger, usecases);
@@ -21,6 +22,7 @@ async function bootstrap() {
 
     app.use(express.json()); 
     app.use(router); 
+    app.use(middlewares.errorHandler)
 
     return {
         configurations,
