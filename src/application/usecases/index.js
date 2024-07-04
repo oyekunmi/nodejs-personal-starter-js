@@ -1,8 +1,8 @@
-function usecases(logger, repositories, cache) {
+function usecases(configurations, logger, repositories) {
 
     return {
-        registerUser: require('./register-user')(logger, repositories, cache),
-        authenticateUser: require('./authenticate-user')(logger, repositories, cache)
+        registerUser: require('./register-user')(logger, repositories),
+        authenticateUser: require('./authenticate-user')(logger, repositories)
     };
 }
 

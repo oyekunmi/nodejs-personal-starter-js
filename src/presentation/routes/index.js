@@ -1,17 +1,17 @@
 const router = require('express').Router();
 
-function setup(logger, controllers) {
+function routes(logger, controllers, middlewares) {
 
-    router.get('/', (req, res) => {
+    router.get('/', middlewares.verifyAuthToken, (req, res) => {
         logger.info('Hello World');
         res.send('Hello World');
     });
 
-    router.post('/user/register', controllers.registerUser);
-    router.post('/user/login', controllers.loginUser);
+    router.post('/user/register', middlewares.appendAuthToken, controllers.registerUser,);
+    router.post('/user/login', middlewares.appendAuthToken, controllers.loginUser);
 
     return router;
 }
 
-module.exports = setup;
+module.exports = routes;
 

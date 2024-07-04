@@ -9,9 +9,10 @@ function usecase(logger, repositories) {
             return new Error('User already exists');
         }
 
-        const hashedPassword = bcrypt.hashSync(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         const user = new UserEntity({ name, email, password: hashedPassword });
         const insertedUser = await repositories.user.createUser(user);
+        insertedUser.password = undefined;
         logger.info('User registered');
         return insertedUser;
     }

@@ -1,4 +1,4 @@
-
+const process = require('process');
 const configurations = {
     port: process.env.APP_PORT || 4000,
     logger: {
@@ -14,6 +14,10 @@ const configurations = {
         password: process.env.CACHE_PASSWORD,
         username: process.env.CACHE_USERNAME,
         db: process.env.CACHE_DB || 0
+    },
+    jwt: {
+        secret: process.env.JWT_SECRET,
+        expiresIn: process.env.JWT_EXPIRES_IN || '5m'
     }
 };
 
