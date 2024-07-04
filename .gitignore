@@ -19,3 +19,7 @@ build/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+coverage/
+
+.$treasure-hunt.drawio.dtmp
