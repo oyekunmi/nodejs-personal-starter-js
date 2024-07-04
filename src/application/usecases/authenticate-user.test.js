@@ -45,31 +45,32 @@ describe('authenticate-user', () => {
         expect(logger.info).toHaveBeenCalledWith('user authenticated');
     });
 
-    // it('should not authenticate a user with invalid credentials', async () => {
-    //     const username = 'testuser';
-    //     const password = 'testpassword';
-    //     const invalidPassword = 'invalidpassword';
+    it('should not authenticate a user with invalid credentials', async () => {
+        const email = 'testuser';
+        const password = 'testpassword';
+        const invalidPassword = 'invalidpassword';
 
-    //     const user = {
-    //         username,
-    //         password: await bcrypt.hash(password, 10),
-    //     };
+        const user = new UserEntity({
+            id: 1,
+            name: 'Test User',
+            email,
+            password: await bcrypt.hash(password, 10)
+        });
+        repositories.user.getUserByEmail.mockResolvedValue(user);
 
-    //     repositories.userRepository.findByUsername.mockResolvedValue(user);
+        const result = await usecase(logger, repositories)({ email, password: invalidPassword });
 
-    //     const result = await usecase(logger, repositories)(username, invalidPassword);
+        expect(result).toEqual(new Error('Invalid username or password'));
+        expect(logger.error).toHaveBeenCalledWith('Invalid username or password');
+    });
 
-    //     expect(result).toBe(false);
-    //     expect(logger.error).toHaveBeenCalledWith('Invalid credentials');
-    // });
+    it('should bubble database errors during authentication', async () => {
+        const username = 'testuser';
+        const password = 'testpassword';
 
-    // it('should handle errors during authentication', async () => {
-    //     const username = 'testuser';
-    //     const password = 'testpassword';
+        repositories.user.getUserByEmail.mockRejectedValue(new Error('Database error'));
 
-    //     repositories.userRepository.findByUsername.mockRejectedValue(new Error('Database error'));
-
-    //     await expect(usecase(logger, repositories)(username, password)).rejects.toThrow('Database error');
-    //     expect(logger.error).toHaveBeenCalledWith('Error during authentication: Database error');
-    // });
+        await expect(usecase(logger, repositories)(username, password)).rejects.toThrow('Database error');
+        // expect(logger.error).toHaveBeenCalledWith('Error during authentication: Database error');
+    });
 });
