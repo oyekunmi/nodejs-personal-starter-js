@@ -1,3 +1,6 @@
+/*global jest, */
+/*eslint no-undef: "error"*/
+
 const bcrypt = require('bcrypt');
 const { describe, it, expect, beforeEach } = require('@jest/globals');
 const usecase = require('./authenticate-user');
