@@ -10,7 +10,7 @@ async function setup(configurations, logger) {
         logger.info('Connected to MongoDB');
         return dbo;
     } catch (err) {
-        logger.error('Error occurred while connecting to MongoDB Atlas...\n', err);
+        logger.error('Error occurred while connecting to database...\n', err);
     }
 }
 
